@@ -1,0 +1,115 @@
+hash: 3671747faf33e56126441d60c587056473b1e1ae3c93d4b27f3ce358fcedd204
+updated: 2017-12-02T21:18:09.567581-05:00
+imports:
+- name: cloud.google.com/go
+  version: 4ae921e17ba38f3ecd017134c7a2244d258a1a6d
+  subpackages:
+  - compute/metadata
+  - internal/version
+  - vision/apiv1
+- name: github.com/golang/protobuf
+  version: 1e59b77b52bf8e4b449a57e6f79f21226d571845
+  subpackages:
+  - proto
+  - protoc-gen-go/descriptor
+  - ptypes
+  - ptypes/any
+  - ptypes/duration
+  - ptypes/timestamp
+  - ptypes/wrappers
+- name: github.com/googleapis/gax-go
+  version: 317e0006254c44a0ac427cc52a0e083ff0b9622f
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: c572efe4294d5a0e354e01f2ddaa8b1f0c3cb3dd
+- name: github.com/huandu/facebook
+  version: cb06a50311533d4c24211a80cffb6cf7eaeb5f52
+- name: github.com/joho/godotenv
+  version: a79fa1e548e2c689c241d10173efd51e5d689d5b
+- name: github.com/tidwall/gjson
+  version: 182ad7605048a24cd37115b7157b8a4436d9ea17
+- name: github.com/tidwall/match
+  version: 1731857f09b1f38450e2c12409748407822dc6be
+- name: golang.org/x/net
+  version: a8b9294777976932365dabb6640cf1468d95c70f
+  subpackages:
+  - context
+  - context/ctxhttp
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
+- name: golang.org/x/oauth2
+  version: f95fa95eaa936d9d87489b15d1d18b97c1ba9c28
+  subpackages:
+  - google
+  - internal
+  - jws
+  - jwt
+- name: golang.org/x/text
+  version: 75cc3cad82b5f47d3fb229ddda8c5167da14f294
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+- name: google.golang.org/api
+  version: 3a1d936b7575b82197a1fea0632218dd07b1e65c
+  subpackages:
+  - googleapi/transport
+  - internal
+  - option
+  - transport
+  - transport/grpc
+  - transport/http
+- name: google.golang.org/appengine
+  version: 9d8544a6b2c7df9cff240fcf92d7b2f59bc13416
+  subpackages:
+  - internal
+  - internal/app_identity
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/modules
+  - internal/remote_api
+  - internal/socket
+  - internal/urlfetch
+  - socket
+  - urlfetch
+- name: google.golang.org/genproto
+  version: 7f0da29060c682909f650ad8ed4e515bd74fa12a
+  subpackages:
+  - googleapis/api/annotations
+  - googleapis/cloud/vision/v1
+  - googleapis/rpc/status
+  - googleapis/type/color
+  - googleapis/type/latlng
+- name: google.golang.org/grpc
+  version: cd563b81ec334abe62cda34a33b8640ea67ef5ba
+  subpackages:
+  - balancer
+  - balancer/roundrobin
+  - codes
+  - connectivity
+  - credentials
+  - credentials/oauth
+  - encoding
+  - grpclb/grpc_lb_v1/messages
+  - grpclog
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - resolver
+  - resolver/dns
+  - resolver/manual
+  - resolver/passthrough
+  - stats
+  - status
+  - tap
+  - transport
+testImports: []
