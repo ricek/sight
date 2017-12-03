@@ -90,9 +90,9 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 				
 				case .notAuthorized:
 					DispatchQueue.main.async {
-						let changePrivatySetting = "AVCamBarcode doesn't have permission to use the camera, please change privacy settings"
+						let changePrivatySetting = "Sight doesn't have permission to use the camera, please change privacy settings"
 						let message = NSLocalizedString(changePrivatySetting, comment: "Alert message when the user has denied access to the camera")
-						let	alertController = UIAlertController(title: "AVCamBarcode", message: message, preferredStyle: .alert)
+						let	alertController = UIAlertController(title: "Sight", message: message, preferredStyle: .alert)
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings",
 						                                                                 comment: "Alert button to open Settings"),
@@ -285,8 +285,8 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 				appear in the same spot regardless of whether the app starts in portrait
 				or landscape.
 			*/
-			let width = 1.2
-			let height = 1.2
+			let width = 1.0
+			let height = 1.0
 			let x = (1.0 - width) / 2.0
 			let y = (1.0 - height) / 2.0
 			let initialRectOfInterest = CGRect(x: x, y: y, width: width, height: height)
@@ -824,10 +824,11 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "outputVolume" {
-            if !volumeChange && (Date.timeIntervalSinceReferenceDate - lastTime) > 5
+            if !volumeChange &&
+                (Date.timeIntervalSinceReferenceDate - lastTime) > 5 &&
+                speechRecognizer.status == .ready
             {
                 //volumePressed()
-                speechRecognizer.cancelRecording()
                 speechRecognizer.startRecording()
             }
         } else {

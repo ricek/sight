@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A921C7F1CD2858B00E7B04B"
-               BuildableName = "Vision.app"
-               BlueprintName = "Vision"
-               ReferencedContainer = "container:Vision.xcodeproj">
+               BuildableName = "Sight.app"
+               BlueprintName = "Sight"
+               ReferencedContainer = "container:Sight.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A921C7F1CD2858B00E7B04B"
-            BuildableName = "Vision.app"
-            BlueprintName = "Vision"
-            ReferencedContainer = "container:Vision.xcodeproj">
+            BuildableName = "Sight.app"
+            BlueprintName = "Sight"
+            ReferencedContainer = "container:Sight.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,9 +58,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A921C7F1CD2858B00E7B04B"
-            BuildableName = "Vision.app"
-            BlueprintName = "Vision"
-            ReferencedContainer = "container:Vision.xcodeproj">
+            BuildableName = "Sight.app"
+            BlueprintName = "Sight"
+            ReferencedContainer = "container:Sight.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A921C7F1CD2858B00E7B04B"
-            BuildableName = "Vision.app"
-            BlueprintName = "Vision"
-            ReferencedContainer = "container:Vision.xcodeproj">
+            BuildableName = "Sight.app"
+            BlueprintName = "Sight"
+            ReferencedContainer = "container:Sight.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

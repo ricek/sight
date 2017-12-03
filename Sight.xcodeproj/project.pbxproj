@@ -25,7 +25,7 @@
 		3185F8BA1FD35EDF00249CF7 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		31AEB6BD1FD30FD2004EC1B7 /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		31AEB6BF1FD3107F004EC1B7 /* photoShutter2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = photoShutter2.caf; sourceTree = "<group>"; };
-		7A921C801CD2858B00E7B04B /* Vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vision.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A921C801CD2858B00E7B04B /* Sight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A921C831CD2858B00E7B04B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A921C851CD2858B00E7B04B /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		7A921C881CD2858B00E7B04B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		7A921C811CD2858B00E7B04B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7A921C801CD2858B00E7B04B /* Vision.app */,
+				7A921C801CD2858B00E7B04B /* Sight.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,9 +85,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7A921C7F1CD2858B00E7B04B /* Vision */ = {
+		7A921C7F1CD2858B00E7B04B /* Sight */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A921C921CD2858B00E7B04B /* Build configuration list for PBXNativeTarget "Vision" */;
+			buildConfigurationList = 7A921C921CD2858B00E7B04B /* Build configuration list for PBXNativeTarget "Sight" */;
 			buildPhases = (
 				7A921C7C1CD2858B00E7B04B /* Sources */,
 				7A921C7D1CD2858B00E7B04B /* Frameworks */,
@@ -97,9 +97,9 @@
 			);
 			dependencies = (
 			);
-			name = Vision;
+			name = Sight;
 			productName = AVCamBarcode;
-			productReference = 7A921C801CD2858B00E7B04B /* Vision.app */;
+			productReference = 7A921C801CD2858B00E7B04B /* Sight.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -120,7 +120,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7A921C7B1CD2858B00E7B04B /* Build configuration list for PBXProject "Vision" */;
+			buildConfigurationList = 7A921C7B1CD2858B00E7B04B /* Build configuration list for PBXProject "Sight" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -133,7 +133,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7A921C7F1CD2858B00E7B04B /* Vision */,
+				7A921C7F1CD2858B00E7B04B /* Sight */,
 			);
 		};
 /* End PBXProject section */
@@ -333,7 +333,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A921C7B1CD2858B00E7B04B /* Build configuration list for PBXProject "Vision" */ = {
+		7A921C7B1CD2858B00E7B04B /* Build configuration list for PBXProject "Sight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A921C901CD2858B00E7B04B /* Debug */,
@@ -342,7 +342,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A921C921CD2858B00E7B04B /* Build configuration list for PBXNativeTarget "Vision" */ = {
+		7A921C921CD2858B00E7B04B /* Build configuration list for PBXNativeTarget "Sight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A921C931CD2858B00E7B04B /* Debug */,

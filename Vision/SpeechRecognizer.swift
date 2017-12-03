@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Speech
+import AudioToolbox
 
 enum SpeechStatus {
     case ready
@@ -53,6 +54,8 @@ class SpeechRecognizer: NSObject {
     
     /// Start streaming the microphone data to the speech recognizer to recognize it live.
     func startRecording() {
+        // Haptic indicating start
+        AudioServicesPlaySystemSound(1521)
         // Setup audio engine and speech recognizer
         let node = audioEngine.inputNode
         let recordingFormat = node.outputFormat(forBus: 0)
@@ -89,6 +92,9 @@ class SpeechRecognizer: NSObject {
                             
                             // post a notification
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DoneListening"), object: nil, userInfo: dataDict)
+                            
+                            // Haptic indicating finished
+                            AudioServicesPlaySystemSound(1520)
                         }
                     })
                 }
@@ -104,6 +110,8 @@ class SpeechRecognizer: NSObject {
         let node = audioEngine.inputNode
         node.removeTap(onBus: 0)
         recognitionTask?.cancel()
+        
+        status = .ready
     }
     
     @IBAction func microphonePressed() {
