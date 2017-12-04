@@ -199,7 +199,7 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 		
 		// Add video input.
 		do {
-			let defaultVideoDevice: AVCaptureDevice?
+            var defaultVideoDevice: AVCaptureDevice?
 			
 			// Choose the back wide angle camera if available, otherwise default to the front wide angle camera.
 			if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
@@ -327,10 +327,12 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         photoOutput.capturePhoto(with: photoSettings, delegate: self)
 	}
     
+    var killProcess = false
     @IBAction private func capturePhoto2() {
         currentCount = 2
         self.audioResponse(withText: "Say hi to Nathanial Ostrer, he's looking happy!", andSpeed: 0.50)
         currentName = "Nathanial Ostrer"
+        self.killProcess = true
         //self.speechRecognizer.startRecording()
     }
     
@@ -338,18 +340,21 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         currentCount = 2
         self.audioResponse(withText: "Say hi to Nathanial Ostrer", andSpeed: 0.50)
         currentName = "Nathanial Ostrer"
+        self.killProcess = true
     }
     
     @IBAction private func capturePhoto4() {
         currentCount = 2
         self.audioResponse(withText: "Say hi to Liang Gao, he's looking sad", andSpeed: 0.50)
         currentName = "Liang Gao"
+        self.killProcess = true
     }
     
     @IBAction private func capturePhoto5() {
         currentCount = 2
         self.audioResponse(withText: "Say hi to Liang Gao", andSpeed: 0.50)
         currentName = "Liang Gao"
+        self.killProcess = true
     }
     
     /*func playSoundToCancelShutter() {
@@ -732,26 +737,42 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     let timeStamp :String = String(format:"%f.jpg", Date.timeIntervalSinceReferenceDate)
                     print(timeStamp)
                     
-                    let compressedImage = UIImageJPEGRepresentation(img, 0.25)
+                    // Rotate image according to device orientation
+                    var radians : Float = 0.0
+                    switch UIDevice.current.orientation{
+                    case .portrait:
+                        radians = 0.0
+                    case .portraitUpsideDown:
+                        radians = Float.pi
+                    case .landscapeLeft:
+                        radians = -Float.pi/2
+                    case .landscapeRight:
+                        radians = Float.pi/2
+                    default:
+                        radians = 0.0
+                    }
+                    
+                    let compressedImage = img.rotate(radians: radians)
+                    
                     // If this was a manual trigger
                     // Then post to Google, checking for text
                     if (volumeChange)
                     {
                         print("Start OCR")
-                        let url = "http://111567b9.ngrok.io/ocr"
-                        let r = STHTTPRequest(urlString: url)
+                        let r = STHTTPRequest(urlString: self.voiceToUrl)
                         r!.addData(toUpload: compressedImage, parameterName: "image", mimeType: "image/jpeg", fileName: timeStamp)
                         // r!.postDictionary = ["param1": "1", "param2": "2", "param3": "hello"]
                         r!.completionBlock = { (headers, body) in
                             // ...
-                            var readString = "The text reads: " + body!
-                            if body == ""
+                            var readString = body!
+                            if body == "" && !self.killProcess
                             {
-                                readString = "I was unable to read the text..."
+                                readString = self.errorResponse
                             }
                             self.audioResponse(withText: readString, andSpeed: 0.50)
                             print(readString)
                             self.volumeChange = false
+                            self.killProcess = false
                         }
                         
                         r!.errorBlock = { (error) in
@@ -759,9 +780,10 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             let nsError = error! as NSError
                             print(nsError.localizedDescription)
                             
-                            let readString = "There was an error when trying to read your text"
+                            let readString = "There was an error identifying anything"
                             self.audioResponse(withText: readString, andSpeed: 0.50)
                             self.volumeChange = false
+                            self.killProcess = false
                         }
                         
                         r!.startAsynchronous()
@@ -772,23 +794,27 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         print("Start Facial")
                         let r2 = STHTTPRequest(urlString: "http://111567b9.ngrok.io/upload")
                         r2!.addData(toUpload: compressedImage, parameterName: "image", mimeType: "image/jpeg", fileName: timeStamp)
+                        
                         r2!.completionBlock = { (headers, body) in
-                            if body != ""
+                            if body != "" && !self.killProcess
                             {
-                                let readString = "Say hi to " + body!
-                                self.audioResponse(withText: readString, andSpeed: 0.45)
-                                self.currentName = body! //Store reference to last person received
+                                let arr = body!.components(separatedBy: "%")
+                                let readString = arr[1]
+                                self.audioResponse(withText: readString, andSpeed: 0.5)
+                                self.currentName = arr[0] //Store reference to last person received
                             }
                             print(body!)
                             print(Date.timeIntervalSinceReferenceDate)
 
                             self.volumeChange = false
+                            self.killProcess = false
                         }
                         
                         r2!.errorBlock = { (error) in
                             let nsError = error! as NSError
                             print(nsError.localizedDescription)
                             self.volumeChange = false
+                            self.killProcess = false
                         }
                         
                         r2!.startAsynchronous()
@@ -806,6 +832,10 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     // Create audioSession listening to outputVolume
     let audioSession = AVAudioSession()
+    
+    // Depending on the text, change the URL and error reponse
+    var voiceToUrl = "http://111567b9.ngrok.io/ocr"
+    var errorResponse = "I was unable to read the text..."
     
     @objc func listenVolumeButton() {
         volumeView.frame = CGRect(x: -20, y: -20, width: 0, height: 0);
@@ -836,11 +866,11 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
 
-    func volumePressed()
+    func volumePressed(say text: String)
     {
         volumeChange = true
         capturePhoto()
-        audioResponse(withText: "Deciphering Text. One moment please.", andSpeed: 0.5)
+        audioResponse(withText: text, andSpeed: 0.5)
         print("got in here")
         //Keep Volume at 0.9
         volumeView.volumeSlider.value = 0.9
@@ -862,10 +892,12 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
         if let response = notification.userInfo?["string"] as? String {
             if response.lowercased().range(of:"text") != nil || response.lowercased().range(of:"read") != nil {
-                volumePressed()
-            } else if response.lowercased().range(of:"more") != nil {
+                self.voiceToUrl = "http://111567b9.ngrok.io/ocr"
+                self.errorResponse = "I was unable to read the text..."
+                volumePressed(say: "Deciphering Text. One moment please.")
+            } else if response.lowercased().range(of:"more") != nil || response.lowercased().range(of:"tell") != nil {
                 print("Start More")
-                let r2 = STHTTPRequest(urlString: "http://111567b9.ngrok.io/upload")
+                let r2 = STHTTPRequest(urlString: "http://111567b9.ngrok.io/moreinfo")
                 r2!.postDictionary = ["name": self.currentName];
                 r2!.completionBlock = { (headers, body) in
                     if body != ""
@@ -884,8 +916,10 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 
                 r2!.startAsynchronous()
                 
-            } else if response.lowercased().range(of:"what") != nil {
-                //volumePressed()
+            } else if response.lowercased().range(of:"what") != nil || response.lowercased().range(of:"thing") != nil {
+                self.voiceToUrl = "http://111567b9.ngrok.io/label"
+                self.errorResponse = "I was unable to identify the object..."
+                volumePressed(say: "Identifying objects around you. One moment please.")
             }
         }
     }
@@ -928,3 +962,31 @@ extension MPVolumeView {
         return slider
     }
 }
+
+extension UIImage {
+    func rotate(radians: Float) -> Data {
+        var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
+        //Trim off the extremely small float value to prevent core graphics from rounding it up
+        newSize.width = floor(newSize.width)
+        newSize.height = floor(newSize.height)
+        
+        UIGraphicsBeginImageContext(newSize);
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //Move origin to middle
+        context.translateBy(x: newSize.width/2, y: newSize.height/2)
+        //Rotate around middle
+        context.rotate(by: CGFloat(radians))
+        
+        self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return UIImageJPEGRepresentation(newImage!, 0.25)!
+    }
+}
+
+
+
+
