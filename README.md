@@ -1,4 +1,9 @@
-# sight
+# Insight (originally called Sight)
+*Created by:
+Najm Sheikh (hello@najmsheikh.me)
+Liang Gao (lianggao@outlook.com)
+Nathaniel Ostrer (nathaniel_ostrer@brown.edu)
+Zak Wegweiser (zak_wegweiser@brown.edu)*
 
 ## Inspiration
 Imagine a world where your best friend is standing in front of you, but you can't see them. Or you go to read a menu, but you are not able to because the restaurant does not have specialized brail menus. For millions of visually impaired people around the world, those are not hypotheticals, they are facts of life.
