@@ -1,7 +1,7 @@
 # Insight (originally called Sight)
 *Created by:
 Najm Sheikh (hello@najmsheikh.me)
-Liang Gao (lianggao@outlook.com)
+Liang Gao (liang@gao.nyc)
 Nathaniel Ostrer (nathaniel_ostrer@brown.edu)
 Zak Wegweiser (zak_wegweiser@brown.edu)*
 
@@ -59,3 +59,5 @@ Over the course of the weekend, we encountered more problems and bugs than we'd 
 If Facebook ever decides to add an API that allows facial recognition, we think that would allow for even more powerful friend recognition functionality in our app.
 
 Ultimately, we plan to host the back-end on Google App Engine.
+
+*(post event: part of the back-end code was able to deploy on GAE, see [vision-api](https://github.com/ricek/sight/tree/vision-api) branch for detail)*
